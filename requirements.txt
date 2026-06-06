@@ -1,0 +1,4 @@
+PyTorch
+NumPy
+SciPy
+Matplotlib
