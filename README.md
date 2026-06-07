@@ -1,6 +1,6 @@
 # TRACE: Transient Chaotic Evolution Network for Time Series Forecasting
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=plastic](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12%2B-red.svg)](https://pytorch.org/)
 
