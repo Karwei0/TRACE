@@ -110,15 +110,15 @@ class Model(nn.Module):
                d_internal = torch.matmul(state, self.linear_A.t())
                
           elif self.chaos_type == 'gru':
-               # 标准网络模块 GRU 作为连续向量场: dS/dt = GRU(0, S) - S
+               # dS/dt = GRU(0, S) - S
                B, N, D = state.shape
-               # GRUCell 要求输入是 2D 张量 [batch_size, input_size]，因此需要展平
+               # GRUCell [batch_size, input_size]，
                state_flat = state.view(B * N, D)
-               # 自治系统不需要外部输入，输入全置为 0
+               
                dummy_input = torch.zeros_like(state_flat)
-               # 计算隐状态更新
+               # update
                h_next = self.gru_cell(dummy_input, state_flat)
-               # 欧拉框架下的导数 = \Delta S
+               # = \Delta S
                d_internal = (h_next - state_flat).view(B, N, D)
                
           else:
