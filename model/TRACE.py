@@ -27,12 +27,11 @@ class Model(nn.Module):
                self.t_evo = torch.tensor(args.t_evo)
 
           if self.chaos_type == 'linear_ode':
-            # 线性 ODE 转移矩阵 (d_chaos x d_chaos)
             # dS/dt = S * A^T
             self.linear_A = nn.Parameter(torch.randn(self.d_chaos, self.d_chaos) * 0.1)
             
           elif self.chaos_type == 'gru':
-               # GRU 作为连续向量场 dS/dt = GRU(0, S) - S
+               # GRU  dS/dt = GRU(0, S) - S
                self.gru_cell = nn.GRUCell(input_size=self.d_chaos, hidden_size=self.d_chaos)
 
           self.decay_rate = args.decay_rate
@@ -98,16 +97,16 @@ class Model(nn.Module):
           elif self.chaos_type == 'vdp':
                d_internal = torch.stack([y, 1.*(1-x**2)*y-x], dim=-1)
           elif self.chaos_type == 'damped_oscillator':
-               # 强阻尼周期系统 (2D ODE): x'' + gamma*x' + omega^2*x = 0
-               # 转化为 d_x = y, d_y = -omega^2*x - gamma*y
-               # 强阻尼条件: gamma^2 - 4*omega^2 > 0 (例如: omega=1.0, gamma=3.0)
+               # 2D ODE: x'' + gamma*x' + omega^2*x = 0
+               #  d_x = y, d_y = -omega^2*x - gamma*y
+               # gamma^2 - 4*omega^2 > 0 (eg omega=1.0, gamma=3.0)
                omega_sq = 1.0
                gamma = 3.0
                d_internal = torch.stack([y, -omega_sq * x - gamma * y], dim=-1)
             
           elif self.chaos_type == 'linear_ode':
-               # 线性 ODE (ND ODE): dS/dt = S * A^T
-               # 这里 state 的形状是 [B, N, d_chaos]
+               # linear ODE (ND ODE) dS/dt = S * A^T
+               # [B, N, d_chaos]
                d_internal = torch.matmul(state, self.linear_A.t())
                
           elif self.chaos_type == 'gru':
