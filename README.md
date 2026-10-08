@@ -1,4 +1,4 @@
-# TRACE: Transient Chaotic Evolution Network for Time Series Forecasting
+# TRACE: Parameter-Efficient Time Series Forecasting via Transient Chaotic System
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=plastic)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)](https://www.python.org/)
@@ -89,7 +89,7 @@ If you find TRACE useful for your research, please cite our paper:
 
 ```bibtex
 @article{trace2026,
-  title={Harnessing Chaos for Time Series Forecasting},
+  title={TRACE: Parameter-Efficient Time Series Forecasting via Transient Chaotic System},
   author={},
   journal={},
   year={2026}
